@@ -1,0 +1,68 @@
+import tkinter as tk
+from tkinter import ttk
+
+def add_row():
+    serial_number = entry_serial.get()
+    tag_id = entry_tag.get()
+    status = entry_status.get()
+    Rssi = entry_Rssi.get()
+    tree.insert("", "end", values=(serial_number, tag_id, status,Rssi))
+    # Clear input fields after adding a row
+    entry_serial.delete(0, tk.END)
+    entry_tag.delete(0, tk.END)
+    entry_status.delete(0, tk.END)
+    entry_Rssi.delete(0,tk.END)
+
+root = tk.Tk()
+root.title("Goushala-Livestock Management")
+
+# Create a frame for the table
+frame_table = tk.Frame(root)
+frame_table.pack(pady=10)
+
+# Create a treeview with columns
+tree = ttk.Treeview(frame_table, columns=("Serial Number", "Tag ID", "Status","Rssi"), show="headings")
+tree.pack()
+
+# Set column headings
+tree.heading("Serial Number", text="Serial Number")
+tree.heading("Tag ID", text="Tag ID")
+tree.heading("Status", text="Status")
+tree.heading("Rssi", text="Rssi")
+
+# Set column widths
+tree.column("Serial Number", width=100)
+tree.column("Tag ID", width=100)
+tree.column("Status", width=100)
+tree.column("Rssi", width=100)
+
+# Create a frame for input fields
+frame_input = tk.Frame(root)
+frame_input.pack(pady=10)
+
+# Create input labels and entry fields
+label_serial = tk.Label(frame_input, text="Serial Number:")
+label_serial.grid(row=0, column=0, padx=5)
+entry_serial = tk.Entry(frame_input)
+entry_serial.grid(row=0, column=1, padx=5)
+
+label_tag = tk.Label(frame_input, text="Tag ID:")
+label_tag.grid(row=1, column=0, padx=5)
+entry_tag = tk.Entry(frame_input)
+entry_tag.grid(row=1, column=1, padx=5)
+
+label_status = tk.Label(frame_input, text="Status:")
+label_status.grid(row=2, column=0, padx=5)
+entry_status = tk.Entry(frame_input)
+entry_status.grid(row=2, column=1, padx=5)
+
+label_Rssi = tk.Label(frame_input, text="Rssi:")
+label_Rssi.grid(row=3, column=0, padx=5)
+entry_Rssi = tk.Entry(frame_input)
+entry_Rssi.grid(row=3, column=1, padx=5)
+
+# Create a button to add a row
+add_button = tk.Button(root, text="Add Row", command=add_row)
+add_button.pack(pady=10)
+
+root.mainloop()
